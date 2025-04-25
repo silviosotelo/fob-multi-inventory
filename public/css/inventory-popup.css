@@ -1,0 +1,296 @@
+/* Multi Inventory Popup Styles */
+
+.multi-inventory-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9998;
+    display: none;
+}
+
+.multi-inventory-popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: none;
+    overflow: hidden;
+}
+
+.multi-inventory-popup {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 90vh;
+}
+
+.multi-inventory-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eaeaea;
+    background-color: #f8f9fa;
+}
+
+.multi-inventory-popup-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.multi-inventory-popup-close-container {
+    cursor: pointer;
+}
+
+.multi-inventory-popup-close {
+    font-size: 24px;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.multi-inventory-popup-close:hover {
+    color: #333;
+}
+
+.multi-inventory-popup-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.multi-inventory-popup-search-container {
+    margin-bottom: 20px;
+}
+
+.multi-inventory-popup-search-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.multi-inventory-popup-address {
+    flex: 1;
+}
+
+.multi-inventory-popup-locations-nearest-location-container,
+.multi-inventory-popup-all-locations-container,
+.multi-inventory-popup-locations-delivery-location-container {
+    margin-bottom: 30px;
+}
+
+.multi-inventory-popup-locations-nearest-location-container h4,
+.multi-inventory-popup-all-locations-container h4,
+.multi-inventory-popup-locations-delivery-location-container h4 {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.multi-inventory-popup-locations-nearest-location-loader {
+    text-align: center;
+    padding: 30px 0;
+    display: none;
+}
+
+.multi-inventory-popup-locations-nearest-location-error {
+    margin-bottom: 20px;
+    display: none;
+}
+
+.multi-inventory-popup-locations-location {
+    padding: 15px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.multi-inventory-popup-locations-location:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.multi-inventory-popup-locations-location-name h5 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.multi-inventory-popup-locations-location-address {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.multi-inventory-popup-locations-location-contact {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.multi-inventory-popup-locations-location-delivery-time {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+.multi-inventory-popup-locations-location-distance {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #666;
+    display: none;
+}
+
+.multi-inventory-popup-locations-location-stock {
+    margin-bottom: 15px;
+}
+
+.multi-inventory-choose-location {
+    width: 100%;
+}
+
+.multi-inventory-choose-location-selected {
+    background-color: #e8f5e9;
+    border-color: #4caf50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .multi-inventory-popup-container {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .multi-inventory-popup-search-input-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Label style inventory selector */
+.multi-inventory-label-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.multi-inventory-label-current {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.multi-inventory-label-current-name {
+    font-weight: 600;
+}
+
+.multi-inventory-label-current-stock {
+    color: #28a745;
+}
+
+.multi-inventory-label-change {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.multi-inventory-inventories-row {
+    display: none;
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+/* Inventory Manager Table Styles */
+.multi-inventory-manager-wrapper {
+    position: relative;
+}
+
+.multi-inventory-manager-table-spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.inventory-column-actions {
+    margin-top: 5px;
+}
+
+/* Dashboard Widget Styles */
+.multi-inventory-dashboard-widget .card {
+    box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+    margin-bottom: 20px;
+}
+
+.inventory-distribution-chart {
+    width: 100%;
+    height: 250px;
+}
+
+/* Text display style */
+.multi-inventory-text {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.multi-inventory-text-inventory {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.multi-inventory-text-inventory:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.multi-inventory-text-inventory-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.multi-inventory-text-inventory-stock-in {
+    color: #28a745;
+}
+
+.multi-inventory-text-inventory-stock-out {
+    color: #dc3545;
+}
+
+.multi-inventory-text-inventory-delivery {
+    font-style: italic;
+    color: #666;
+    margin-top: 5px;
+}

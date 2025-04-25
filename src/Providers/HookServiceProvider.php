@@ -95,4 +95,31 @@ class HookServiceProvider extends ServiceProvider
         
         return $error;
     }
+
+    public function registerInventorySelector(): void
+    {
+        $product = Theme::getData('product');
+        
+        if (!$product) {
+            return;
+        }
+        
+        // Solo para productos con stock gestionado
+        if (!$product->isStockManaged()) {
+            return;
+        }
+        
+        $inventories = Inventory::where('status', 'published')
+            ->where('is_frontend', true)
+            ->orderBy('order_priority', 'desc')
+            ->get();
+            
+        if ($inventories->isEmpty()) {
+            return;
+        }
+        
+        $displayType = setting('multi_inventory_display_type', 'radio');
+        
+        echo view('plugins/multi-inventory::partials.selectors.' . $displayType, compact('product', 'inventories'))->render();
+    }
 }

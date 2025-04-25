@@ -1,0 +1,195 @@
+/* Multi Inventory Plugin Frontend Styles */
+
+/* Inventory Selector */
+.inventory-selector {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.inventory-selector .form-label {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Radio style */
+.inventory-radio-selector .form-check {
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.inventory-radio-selector .form-check:hover {
+    background-color: #f0f0f0;
+}
+
+.inventory-radio-selector .form-check-input:checked + .form-check-label {
+    font-weight: 600;
+}
+
+.inventory-radio-selector .inventory-info {
+    margin-top: 5px;
+    margin-left: 24px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.inventory-radio-selector .delivery-time {
+    font-style: italic;
+}
+
+/* Dropdown style */
+.inventory-dropdown-selector select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.inventory-dropdown-selector .inventory-info {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Label style */
+.inventory-label-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.inventory-label {
+    flex: 1 0 calc(33.333% - 8px);
+    min-width: 140px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.inventory-label:hover {
+    border-color: #aaa;
+}
+
+.inventory-label.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.inventory-label .inventory-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.inventory-label .badge {
+    margin-top: 5px;
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.inventory-label .delivery-time {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    display: block;
+}
+
+.inventory-label .price {
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+/* Inventory Locations Page */
+.inventory-card {
+    height: 100%;
+    transition: transform 0.2s;
+}
+
+.inventory-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.inventory-card .card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.inventory-card address {
+    font-style: normal;
+}
+
+.inventory-card .contact-info {
+    margin-bottom: 15px;
+}
+
+.inventory-card .contact-info i {
+    width: 20px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.inventory-card .card-footer {
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Map */
+.inventory-map-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#inventory-map {
+    height: 400px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.inventory-map-popup {
+    max-width: 250px;
+}
+
+.inventory-map-popup h5 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.inventory-map-popup .address {
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.inventory-map-popup .contact {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.inventory-map-popup .delivery {
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .inventory-label {
+        flex: 1 0 calc(50% - 8px);
+    }
+}
+
+@media (max-width: 480px) {
+    .inventory-label {
+        flex: 1 0 100%;
+    }
+}
