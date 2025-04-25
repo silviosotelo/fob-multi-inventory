@@ -2,147 +2,165 @@
 
 namespace FriendsOfBotble\MultiInventory\Forms;
 
+use Botble\Base\Forms\FieldOptions\NameFieldOption;
+use Botble\Base\Forms\FieldOptions\StatusFieldOption;
+use Botble\Base\Forms\FieldOptions\TextFieldOption;
+use Botble\Base\Forms\FieldOptions\TextareaFieldOption;
+use Botble\Base\Forms\FieldOptions\OnOffFieldOption;
+use Botble\Base\Forms\FieldOptions\SelectFieldOption;
+use Botble\Base\Forms\FieldOptions\EmailFieldOption;
+use Botble\Base\Forms\FieldOptions\NumberFieldOption;
+use Botble\Base\Forms\Fields\TextField;
+use Botble\Base\Forms\Fields\TextareaField;
+use Botble\Base\Forms\Fields\OnOffField;
+use Botble\Base\Forms\Fields\SelectField;
+use Botble\Base\Forms\Fields\EmailField;
+use Botble\Base\Forms\Fields\NumberField;
 use Botble\Base\Forms\FormAbstract;
-use Botble\Base\Enums\BaseStatusEnum;
+use Botble\Ecommerce\Facades\EcommerceHelper;
 use FriendsOfBotble\MultiInventory\Models\Inventory;
+use FriendsOfBotble\MultiInventory\Http\Requests\InventoryRequest;
 
 class InventoryForm extends FormAbstract
 {
-    protected $template = 'core/base::forms.form-tabs';
-
-    public function buildForm(): void
+    public function setup(): void
     {
         $this
-            ->setupModel(new Inventory)
+            ->model(Inventory::class)
+            ->setValidatorClass(InventoryRequest::class)
             ->withCustomFields()
-            ->add('name', 'text', [
-                'label' => trans('core/base::forms.name'),
-                'label_attr' => ['class' => 'control-label required'],
-                'attr' => [
-                    'placeholder' => trans('core/base::forms.name_placeholder'),
-                    'data-counter' => 120,
-                ],
-            ])
-            ->add('description', 'textarea', [
-                'label' => trans('core/base::forms.description'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'rows' => 4,
-                    'placeholder' => trans('core/base::forms.description_placeholder'),
-                    'data-counter' => 400,
-                ],
-            ])
-            ->add('address', 'text', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.address'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => trans('plugins/multi-inventory::multi-inventory.address_placeholder'),
-                    'data-counter' => 255,
-                ],
-            ])
-            ->add('city', 'text', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.city'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => trans('plugins/multi-inventory::multi-inventory.city_placeholder'),
-                    'data-counter' => 255,
-                ],
-            ])
-            ->add('state', 'text', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.state'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => trans('plugins/multi-inventory::multi-inventory.state_placeholder'),
-                    'data-counter' => 255,
-                ],
-            ])
-            ->add('country', 'customSelect', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.country'),
-                'label_attr' => ['class' => 'control-label'],
-                'choices' => get_countries_list(),
-            ])
-            ->add('zip_code', 'text', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.zip_code'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => trans('plugins/multi-inventory::multi-inventory.zip_code_placeholder'),
-                    'data-counter' => 20,
-                ],
-            ])
-            ->add('email', 'email', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.email'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => trans('plugins/multi-inventory::multi-inventory.email_placeholder'),
-                    'data-counter' => 60,
-                ],
-            ])
-            ->add('phone', 'text', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.phone'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => trans('plugins/multi-inventory::multi-inventory.phone_placeholder'),
-                    'data-counter' => 20,
-                ],
-            ])
-            ->add('latitude', 'text', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.latitude'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => '40.7128',
-                    'data-counter' => 20,
-                ],
-            ])
-            ->add('longitude', 'text', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.longitude'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => '-74.0060',
-                    'data-counter' => 20,
-                ],
-            ])
-            ->add('is_default', 'onOff', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.is_default'),
-                'label_attr' => ['class' => 'control-label'],
-                'default_value' => false,
-            ])
-            ->add('is_frontend', 'onOff', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.is_frontend'),
-                'label_attr' => ['class' => 'control-label'],
-                'default_value' => true,
-                'help_block' => [
-                    'text' => trans('plugins/multi-inventory::multi-inventory.is_frontend_help'),
-                ],
-            ])
-            ->add('is_backend', 'onOff', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.is_backend'),
-                'label_attr' => ['class' => 'control-label'],
-                'default_value' => true,
-                'help_block' => [
-                    'text' => trans('plugins/multi-inventory::multi-inventory.is_backend_help'),
-                ],
-            ])
-            ->add('delivery_time', 'text', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.delivery_time'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => trans('plugins/multi-inventory::multi-inventory.delivery_time_placeholder'),
-                    'data-counter' => 255,
-                ],
-            ])
-            ->add('order_priority', 'number', [
-                'label' => trans('plugins/multi-inventory::multi-inventory.order_priority'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => '0',
-                ],
-                'default_value' => 0,
-            ])
-            ->add('status', 'customSelect', [
-                'label' => trans('core/base::tables.status'),
-                'label_attr' => ['class' => 'control-label required'],
-                'choices' => BaseStatusEnum::labels(),
-            ])
+            ->add(
+                'name',
+                TextField::class,
+                NameFieldOption::make()
+                    ->label(trans('core/base::forms.name'))
+                    ->required()
+            )
+            ->add(
+                'description',
+                TextareaField::class,
+                TextareaFieldOption::make()
+                    ->label(trans('core/base::forms.description'))
+                    ->rows(4)
+                    ->placeholder(trans('core/base::forms.description_placeholder'))
+                    ->maxLength(400)
+            )
+            ->add(
+                'address',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.address'))
+                    ->placeholder(trans('plugins/multi-inventory::multi-inventory.address_placeholder'))
+                    ->maxLength(255)
+            )
+            ->add(
+                'city',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.city'))
+                    ->placeholder(trans('plugins/multi-inventory::multi-inventory.city_placeholder'))
+                    ->maxLength(255)
+            )
+            ->add(
+                'state',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.state'))
+                    ->placeholder(trans('plugins/multi-inventory::multi-inventory.state_placeholder'))
+                    ->maxLength(255)
+            )
+            ->add(
+                'country',
+                SelectField::class,
+                SelectFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.country'))
+                    ->choices(EcommerceHelper::getAvailableCountries())
+                    ->searchable()
+            )
+            ->add(
+                'zip_code',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.zip_code'))
+                    ->placeholder(trans('plugins/multi-inventory::multi-inventory.zip_code_placeholder'))
+                    ->maxLength(20)
+            )
+            ->add(
+                'email',
+                EmailField::class,
+                EmailFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.email'))
+                    ->placeholder(trans('plugins/multi-inventory::multi-inventory.email_placeholder'))
+                    ->maxLength(60)
+            )
+            ->add(
+                'phone',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.phone'))
+                    ->placeholder(trans('plugins/multi-inventory::multi-inventory.phone_placeholder'))
+                    ->maxLength(20)
+            )
+            ->add(
+                'latitude',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.latitude'))
+                    ->placeholder('40.7128')
+                    ->maxLength(20)
+            )
+            ->add(
+                'longitude',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.longitude'))
+                    ->placeholder('-74.0060')
+                    ->maxLength(20)
+            )
+            ->add(
+                'is_default',
+                OnOffField::class,
+                OnOffFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.is_default'))
+                    ->defaultValue(false)
+            )
+            ->add(
+                'is_frontend',
+                OnOffField::class,
+                OnOffFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.is_frontend'))
+                    ->defaultValue(true)
+                    ->helperText(trans('plugins/multi-inventory::multi-inventory.is_frontend_help'))
+            )
+            ->add(
+                'is_backend',
+                OnOffField::class,
+                OnOffFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.is_backend'))
+                    ->defaultValue(true)
+                    ->helperText(trans('plugins/multi-inventory::multi-inventory.is_backend_help'))
+            )
+            ->add(
+                'delivery_time',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.delivery_time'))
+                    ->placeholder(trans('plugins/multi-inventory::multi-inventory.delivery_time_placeholder'))
+                    ->maxLength(255)
+            )
+            ->add(
+                'order_priority',
+                NumberField::class,
+                NumberFieldOption::make()
+                    ->label(trans('plugins/multi-inventory::multi-inventory.order_priority'))
+                    ->placeholder('0')
+                    ->defaultValue(0)
+            )
+            ->add(
+                'status',
+                SelectField::class,
+                StatusFieldOption::make()
+            )
             ->setBreakFieldPoint('status');
     }
 }

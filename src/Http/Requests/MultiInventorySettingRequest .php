@@ -3,7 +3,9 @@
 namespace FriendsOfBotble\MultiInventory\Http\Requests;
 
 use Botble\Base\Forms\FormRequest;
-
+if (!defined('INVENTORY_MODULE_SCREEN_NAME')) {
+    define('INVENTORY_MODULE_SCREEN_NAME', 'multi-inventory');
+}
 class MultiInventorySettingRequest extends FormRequest
 {
     public function rules(): array
