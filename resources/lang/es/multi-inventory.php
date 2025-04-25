@@ -93,4 +93,8 @@ return [
     'back_to_list' => 'Volver a la lista',
     'save_changes' => 'Guardar Cambios',
     'cancel' => 'Cancelar',
+
+    // ... otras traducciones existentes
+    'inventory_value' => 'Valor del Inventario',
+    'critical_inventories' => 'Inventarios Críticos',
 ];

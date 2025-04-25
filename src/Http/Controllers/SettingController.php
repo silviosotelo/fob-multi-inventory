@@ -45,7 +45,7 @@ class SettingController extends BaseController
             ->setMessage(trans('core/base::notices.update_success_message'));
     }
     
-    public function setSelectedInventory(Request $request, BaseHttpResponse $response)
+    public function setSelectedInventorys(Request $request, BaseHttpResponse $response)
     {
         $inventoryId = $request->input('inventory_id');
         
@@ -54,5 +54,22 @@ class SettingController extends BaseController
         }
         
         return $response->setMessage('Inventory selected successfully');
+    }
+    public function setSelectedInventory(Request $request, BaseHttpResponse $response)
+    {
+        $inventoryId = $request->input('inventory_id');
+        $context = $request->input('context', 'frontend');
+        
+        if ($inventoryId) {
+            $sessionKey = $context === 'backend' 
+                ? 'selected_backend_inventory_id' 
+                : 'selected_inventory_id';
+            
+            Session::put($sessionKey, $inventoryId);
+        }
+        
+        return $response
+            ->setData(['success' => true])
+            ->setMessage(__('Inventory selected successfully'));
     }
 }

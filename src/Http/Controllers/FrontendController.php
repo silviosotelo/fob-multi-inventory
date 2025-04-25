@@ -32,12 +32,19 @@ class FrontendController extends BaseController
     public function setSelectedInventory(Request $request, BaseHttpResponse $response)
     {
         $inventoryId = $request->input('inventory_id');
+        $context = $request->input('context', 'frontend');
         
         if ($inventoryId) {
-            Session::put('selected_inventory_id', $inventoryId);
+            $sessionKey = $context === 'backend' 
+                ? 'selected_backend_inventory_id' 
+                : 'selected_inventory_id';
+            
+            Session::put($sessionKey, $inventoryId);
         }
         
-        return $response->setMessage(__('Inventory selected successfully'));
+        return $response
+            ->setData(['success' => true])
+            ->setMessage(__('Inventory selected successfully'));
     }
 
     /**

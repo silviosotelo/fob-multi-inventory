@@ -68,4 +68,8 @@ return [
     'order' => 'By Order Priority',
     'count' => 'Show Count',
     'inout' => 'In Stock/Out of Stock',
+    
+    // ... otras traducciones existentes
+    'inventory_value' => 'Inventory Value',
+    'critical_inventories' => 'Critical Inventories',
 ];

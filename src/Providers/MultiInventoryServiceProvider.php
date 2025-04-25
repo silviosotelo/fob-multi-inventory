@@ -163,6 +163,7 @@ class MultiInventoryServiceProvider extends ServiceProvider
 
                 return $form;
             }, 124, 2);
+            
         });
     }
 

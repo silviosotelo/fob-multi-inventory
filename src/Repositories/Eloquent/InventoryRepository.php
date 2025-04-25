@@ -13,14 +13,22 @@ class InventoryRepository extends RepositoriesAbstract implements InventoryInter
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getAllActive()
+    public function getAllActive($backendOnly = false)
     {
-        $data = $this->model
-            ->where('status', 'published')
+        $query = $this->model->where('status', 'published');
+        
+        if ($backendOnly) {
+            $query->where('is_backend', true);
+        }
+        
+        return $query
             ->orderBy('order_priority', 'desc')
             ->get();
-
-        return $data;
+    }
+    
+    public function getBackendInventories()
+    {
+        return $this->getAllActive(true);
     }
     
     /**
