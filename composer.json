@@ -1,0 +1,21 @@
+{
+    "name": "friendsofbotble/multi-inventory",
+    "description": "Manage multiple inventories for your ecommerce store",
+    "type": "package",
+    "require": {
+        "botble/platform": "*",
+        "botble/plugin-management": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "FriendsOfBotble\\MultiInventory\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FriendsOfBotble\\MultiInventory\\Providers\\MultiInventoryServiceProvider"
+            ]
+        }
+    }
+}

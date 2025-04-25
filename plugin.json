@@ -1,0 +1,9 @@
+{
+    "name": "FOB Multi Inventory",
+    "namespace": "FriendsOfBotble\\MultiInventory\\",
+    "provider": "FriendsOfBotble\\MultiInventory\\Providers\\MultiInventoryServiceProvider",
+    "author": "Friends of Botble",
+    "url": "https://github.com/FriendsOfBotble/fob-multi-inventory",
+    "version": "1.0.0",
+    "description": "Manage multiple inventories and warehouses for your e-commerce store"
+}
