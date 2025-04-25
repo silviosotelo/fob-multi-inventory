@@ -1,4 +1,4 @@
-{{-- plugins/multi-inventory/resources/views/product-inventories.blade.php --}}
+{{-- plugins/multi-inventory/resources/views/inventory-product.blade.php --}}
 <div class="multi-inventory-section">
     <div class="flexbox-grid no-bg">
         <div class="flexbox-content">

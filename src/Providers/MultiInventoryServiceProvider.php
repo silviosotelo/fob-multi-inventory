@@ -40,7 +40,7 @@ class MultiInventoryServiceProvider extends ServiceProvider
             return new \FriendsOfBotble\MultiInventory\Http\Controllers\ProductController();
         });
     }
-    
+
 
 
     public function boot(): void
