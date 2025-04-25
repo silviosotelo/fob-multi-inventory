@@ -2,6 +2,7 @@
 
 use Botble\Base\Facades\BaseHelper;
 use Illuminate\Support\Facades\Route;
+use FriendsOfBotble\MultiInventory\Http\Controllers\ProductController;
 
 Route::group(['namespace' => 'FriendsOfBotble\MultiInventory\Http\Controllers', 'middleware' => ['web', 'core']], function () {
     Route::group(['prefix' => BaseHelper::getAdminPrefix(), 'middleware' => 'auth'], function () {
@@ -81,4 +82,7 @@ Route::group(['namespace' => 'FriendsOfBotble\MultiInventory\Http\Controllers', 
         'as' => 'public.multi-inventory.product-inventory',
         'uses' => 'FrontendController@getProductInventory',
     ]);
+    
+    Route::post('update-inventory/{id}', [ProductController::class, 'updateInventory'])
+        ->name('update-inventory');
 });

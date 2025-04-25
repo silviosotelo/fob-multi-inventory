@@ -19,6 +19,10 @@ class HookServiceProvider extends ServiceProvider
         add_filter('ecommerce_product_price_html', [$this, 'modifyPriceBasedOnInventory'], 15, 2);
         
         add_filter('ecommerce_before_product_add_to_cart', [$this, 'validateInventoryBeforeAddToCart'], 15, 3);
+        
+        // Hook para la página de edición de productos
+        add_action(BASE_ACTION_META_BOXES, [$this, 'registerProductInventoryBox'], 50, 3);
+        
     }
     
     public function addThemeOptions(): void
@@ -121,5 +125,52 @@ class HookServiceProvider extends ServiceProvider
         $displayType = setting('multi_inventory_display_type', 'radio');
         
         echo view('plugins/multi-inventory::partials.selectors.' . $displayType, compact('product', 'inventories'))->render();
+    }
+    
+    public function registerProductInventoryBox($priority, $data, $screen)
+    {
+        if ($data instanceof Product && in_array($screen, ['products.create', 'products.edit'])) {
+            add_meta_box(
+                'product_inventory_wrap',
+                trans('plugins/multi-inventory::multi-inventory.inventory_management'),
+                [$this, 'productInventoryMetaField'],
+                $screen,
+                'advanced',
+                'default'
+            );
+        }
+    }
+
+    public function productInventoryMetaField($context)
+    {
+        $product = $context->getModel();
+        
+        if (!$product) {
+            return '';
+        }
+        
+        $inventories = Inventory::where('status', 'published')->get();
+        
+        if ($inventories->isEmpty()) {
+            return view('plugins/multi-inventory::admin.no-inventories')->render();
+        }
+        
+        $inventoryData = [];
+        
+        foreach ($inventories as $inventory) {
+            $inventoryProduct = $product->inventories()->where('inventory_id', $inventory->id)->first();
+            
+            $inventoryData[] = [
+                'id' => $inventory->id,
+                'name' => $inventory->name,
+                'stock' => $inventoryProduct ? $inventoryProduct->pivot->stock : 0,
+                'price' => $inventoryProduct ? $inventoryProduct->pivot->price : null,
+            ];
+        }
+        
+        return view('plugins/multi-inventory::forms.inventory-product', [
+            'inventories' => $inventoryData,
+            'product' => $product,
+        ])->render();
     }
 }

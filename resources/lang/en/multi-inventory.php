@@ -39,4 +39,33 @@ return [
     'out_of_stock' => 'Out of Stock',
     'no_inventory_selected' => 'Please select an inventory before adding this product to cart.',
     'not_enough_stock' => 'Sorry. You can not purchase more than :quantity items from :inventory inventory.',
+    // Traducciones faltantes
+    'settings_description' => 'Configure multi inventory plugin settings',
+    'click_collect' => 'Click & Collect',
+    'modify_stock_quantity' => 'Modify stock quantity',
+    'reduce_stock_on_pending' => 'Reduce stock on pending orders',
+    'inventory_required' => 'Inventory selection required',
+    'display_type' => 'Display type',
+    'order_flow' => 'Order flow',
+    'stock_display' => 'Stock display',
+    
+    // Más traducciones que podrían faltar
+    'delivery' => 'Delivery',
+    'text_in_stock' => 'Text for in stock',
+    'text_out_of_stock' => 'Text for out of stock',
+    'google_maps_api_key' => 'Google Maps API Key',
+    
+    // Opciones para los selects
+    'radio' => 'Radio Buttons',
+    'select' => 'Dropdown Select',
+    'label' => 'Label',
+    'hidden' => 'Hidden',
+    'custom' => 'Custom Inventory',
+    'country' => 'By Country',
+    'most_stock' => 'Most Stock',
+    'lowest_stock' => 'Lowest Stock',
+    'name_option' => 'By Name',
+    'order' => 'By Order Priority',
+    'count' => 'Show Count',
+    'inout' => 'In Stock/Out of Stock',
 ];

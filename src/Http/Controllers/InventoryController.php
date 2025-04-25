@@ -12,11 +12,19 @@ use FriendsOfBotble\MultiInventory\Forms\InventoryForm;
 use FriendsOfBotble\MultiInventory\Http\Requests\InventoryRequest;
 use FriendsOfBotble\MultiInventory\Models\Inventory;
 use FriendsOfBotble\MultiInventory\Tables\InventoryTable;
+use FriendsOfBotble\MultiInventory\Repositories\Interfaces\InventoryInterface;
 use Exception;
 use Illuminate\Http\Request;
 
 class InventoryController extends BaseController
 {
+    protected $inventoryRepository;
+    
+    public function __construct(InventoryInterface $inventoryRepository)
+    {
+        $this->inventoryRepository = $inventoryRepository;
+    }
+    
     public function index(InventoryTable $table)
     {
         page_title()->setTitle(trans('plugins/multi-inventory::multi-inventory.inventories'));

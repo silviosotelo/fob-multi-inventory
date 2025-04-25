@@ -7,6 +7,7 @@ use Botble\Base\Http\Controllers\BaseController;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\Setting\Supports\SettingStore;
 use FriendsOfBotble\MultiInventory\Http\Requests\MultiInventorySettingRequest;
+use FriendsOfBotble\MultiInventory\Models\Inventory;
 use Illuminate\Http\Request;
 
 class SettingController extends BaseController
@@ -15,7 +16,12 @@ class SettingController extends BaseController
     {
         page_title()->setTitle(trans('plugins/multi-inventory::multi-inventory.settings'));
 
-        return view('plugins/multi-inventory::settings');
+        // Obtener la lista de inventarios para el select
+        $inventories = Inventory::where('status', 'published')
+            ->pluck('name', 'id')
+            ->toArray();
+
+        return view('plugins/multi-inventory::settings', compact('inventories'));
     }
 
     public function update(MultiInventorySettingRequest $request, BaseHttpResponse $response, SettingStore $settingStore)
